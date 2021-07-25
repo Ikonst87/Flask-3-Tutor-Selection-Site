@@ -41,3 +41,7 @@ def render_booking_form():
 @app.route("/booking_done")
 def render_success_booking_form():
     return "Здесь страница успешного бронирования занятия"
+
+
+if __name__ == '__main__'
+    app.run()
