@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block wrapper_content%}
+<main class="container mt-3">
+    <h1 class="h1 text-center w-50 mx-auto mt-1 py-5 mb-4"><strong>Все преподаватели</strong></h1>
+    <div class="row">
+        <div class="col-12 col-lg-10 offset-lg-1 m-auto">
+            <div class="card mb-4">
+                <div class="card-body align-right">
+                    <p class="lead float-left d-inline-block mt-2 mb-0"><strong>{{teachers|length}} преподавателей в
+                        базе</strong></p>
+                    <form action="/all/" class="float-right d-inline-block" method="POST">
+                        {{form.csrf_token()}}
+                        <div class="form-inline">
+                            <select name="comp_select" class="custom-select my-1 mr-2" id="inlineFormCustomSelectPref">
+                                <option value="0" {% if sort_order=='0' %} selected {% endif %}>В случайном порядке
+                                </option>
+                                <option value="3" {% if sort_order=='3' %} selected {% endif %}>Сначала лучшие по
+                                    рейтингу
+                                </option>
+                                <option value="1" {% if sort_order=='1' %} selected {% endif %}>Сначала дорогие</option>
+                                <option value="2" {% if sort_order=='2' %} selected {% endif %}>Сначала недорогие
+                                </option>
+                            </select>
+                            {{form.submit(class_="btn btn-primary my-1")}}
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% if sort_order == '1'%}
+            {% for key, value in teachers.items() | sort(attribute='1.price', reverse=True) %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-3"><img src="{{value.picture}}" class="img-fluid" alt=""></div>
+                        <div class="col-9">
+                            <p class="float-right">Рейтинг: {{value.rating}} Ставка: {{value.price}} / час</p>
+                            <h2 class="h4">{{value.name}}</h2>
+                            <p>{{value.about}}</p>
+                            <a href="/profile/{{key}}" class="btn btn-outline-primary btn-sm mr-3 mb-2">Показать
+                                информаци и расписание</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% elif sort_order == '2'%}
+            {% for key, value in teachers.items() | sort(attribute='1.price') %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-3"><img src="{{value.picture}}" class="img-fluid" alt=""></div>
+                        <div class="col-9">
+                            <p class="float-right">Рейтинг: {{value.rating}} Ставка: {{value.price}} / час</p>
+                            <h2 class="h4">{{value.name}}</h2>
+                            <p>{{value.about}}</p>
+                            <a href="/profile/{{key}}" class="btn btn-outline-primary btn-sm mr-3 mb-2">Показать
+                                информаци и расписание</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% elif sort_order == '3'%}
+            {% for key, value in teachers.items() | sort(attribute='1.rating', reverse=True) %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-3"><img src="{{value.picture}}" class="img-fluid" alt=""></div>
+                        <div class="col-9">
+                            <p class="float-right">Рейтинг: {{value.rating}} Ставка: {{value.price}} / час</p>
+                            <h2 class="h4">{{value.name}}</h2>
+                            <p>{{value.about}}</p>
+                            <a href="/profile/{{key}}" class="btn btn-outline-primary btn-sm mr-3 mb-2">Показать
+                                информаци и расписание</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            {% for key, value in teachers.items()%}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-3"><img src="{{value.picture}}" class="img-fluid" alt=""></div>
+                        <div class="col-9">
+                            <p class="float-right">Рейтинг: {{value.rating}} Ставка: {{value.price}} / час</p>
+                            <h2 class="h4">{{value.name}}</h2>
+                            <p>{{value.about}}</p>
+                            <a href="/profile/{{key}}" class="btn btn-outline-primary btn-sm mr-3 mb-2">Показать
+                                информаци и расписание</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+    <h2 class="text-center mt-5 mb-3">Не нашли своего репетитора?</h2>
+    <p class="text-center mb-4">Расскажите, кто вам нужен и мы подберем его сами</p>
+    <div class="text-center pb-5">
+        <a href="request.html" class="btn btn-primary">Заказать подбор</a>
+    </div>
+
+</main>
+{% endblock %}

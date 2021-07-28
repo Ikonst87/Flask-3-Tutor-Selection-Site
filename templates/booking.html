@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block wrapper_content%}
+<main class="container mt-3">
+    <div class="row mt-5">
+        <div class="col-10 col-md-6 offset-1 offset-md-3 mb-3">
+            <form action="/booking_done/" method="POST" class="card mb-3">
+                <div class="card-body text-center pt-5">
+                    <img src="{{tutor.picture}}" class="mb-3" width="95" alt="">
+                    <h2 class="h5 card-title mt-2 mb-2">{{tutor.name}}</h2>
+                    <p class="my-1">Запись на пробный урок</p>
+                    <p class="my-1">{{day}}, {{time}}</p>
+                </div>
+                <hr/>
+                <div class="card-body mx-3">
+                    {{ form.csrf_token() }}
+                    <div class="row">
+                        {{form.day(class_="form-control", value = day)}}
+                        {{form.time(class_="form-control", value = time)}}
+                        {{form.tutor(class_="form-control", value = tutor_id)}}
+                    </div>
+
+                    {{form.name.label(class_="mb-1 mt-2")}}
+                    {{form.name(class_="form-control")}}
+
+                    {{form.phone.label(class_="mb-1 mt-2")}}
+                    {{form.phone(class_="form-control")}}
+
+                    {{form.submit(class_="btn btn-primary btn-block mt-4")}}
+
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}
