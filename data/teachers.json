@@ -670,7 +670,8 @@
         "price": 1700,
         "goals": [
             "relocate",
-            "work"
+            "work",
+            "programming"
         ],
         "free": {
             "mon": {
@@ -752,7 +753,8 @@
         "rating": 4.1,
         "price": 1200,
         "goals": [
-            "work"
+            "work",
+            "programming"
         ],
         "free": {
             "mon": {
@@ -836,7 +838,8 @@
         "goals": [
             "travel",
             "study",
-            "work"
+            "work",
+            "programming"
         ],
         "free": {
             "mon": {
@@ -919,7 +922,8 @@
         "price": 900,
         "goals": [
             "travel",
-            "work"
+            "work",
+            "programming"
         ],
         "free": {
             "mon": {
