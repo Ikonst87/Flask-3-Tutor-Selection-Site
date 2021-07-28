@@ -112,6 +112,11 @@ def render_booking_form(tutor_id, day_of_week, time):
     tutors = database_funcs.get_data_from_json("teachers")
     try:
         tutor = tutors[tutor_id]
+        try:
+            tutors[tutor_id]["free"][day_of_week][time]
+        except KeyError:
+            error = f"Указанный день: {day_of_week} и время {time} в расписание репититора не найдены"
+            return render_template("error.html", error=error), 404
     except KeyError:
         error = f"Преподавателя с ID: {tutor_id} не найдено в БД"
         return render_template("error.html", error=error), 404
