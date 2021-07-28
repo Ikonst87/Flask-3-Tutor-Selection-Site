@@ -1,4 +1,5 @@
 import random
+import configparser
 
 from flask import Flask, render_template, request
 from flask_wtf import CSRFProtect
@@ -8,7 +9,9 @@ import forms
 
 app = Flask(__name__)
 csrf = CSRFProtect(app)
-secret_key = 'some_key_string'
+parser = configparser.ConfigParser()
+parser.read("config")
+secret_key = parser.get("config", "secret_key")
 app.config["SECRET_KEY"] = secret_key
 
 
